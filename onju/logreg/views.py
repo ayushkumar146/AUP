@@ -1,9 +1,11 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.template import loader
 from django.http import HttpResponse
 from django.contrib.auth import authenticate,login,logout
+from django.urls import reverse
 # Create your views here.
 
 
@@ -27,7 +29,7 @@ def makeup(request):
         login(request,user)
         messages.info(request,'login successful')
 
-        return redirect('/home/Dashboard/')
+        return redirect(reverse('dashboard:user-homepage', args=[user.id]))
     
      template = loader.get_template('mylogin.html')
      context ={}
@@ -118,3 +120,5 @@ def logout_user(request):
     logout(request)
     messages.info(request,'logout successful')
     return redirect('/auth/login/')
+
+

@@ -7,4 +7,5 @@ urlpatterns = [
     path("myregister/", makedown, name="register-user"),
     # path("login/", login_user, name="login-user"),
     path("logout/", logout_user, name="logout-user"),
+    path("home/",include("dashboard.urls")),
 ]
