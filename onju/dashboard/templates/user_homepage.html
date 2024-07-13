@@ -4,9 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap Sidebar</title>
+    <title>Dashboard</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
     <style>
         @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
@@ -58,7 +58,7 @@
 
         .navbar-btn {
             box-shadow: none;
-            background-color:red;
+            background-color: red;
             outline: none !important;
             border: none;
         }
@@ -83,7 +83,7 @@
             min-width: 250px;
             max-width: 250px;
             background: #000; /* Changed to black */
-            color: #f00; /* Changed to red */
+            color: yellow; /* Changed to red */
             transition: all 0.3s;
         }
 
@@ -94,6 +94,7 @@
         #sidebar .sidebar-header {
             padding: 20px;
             background: #111; /* Darker shade for the header */
+            font-weight: bolder;
         }
 
         #sidebar ul.components {
@@ -118,7 +119,7 @@
             background: #f00; /* Red background on hover */
         }
 
-        #sidebar ul li active>a{
+        #sidebar ul li.active {
             color: #fff;
             background: #111;
         }
@@ -191,9 +192,19 @@
             #sidebarCollapse span {
                 display: none;
             }
+
+            .navbar .navbar-brand {
+                font-size: 1.5rem; /* Adjust logo font size for smaller screens */
+            }
         }
 
-        {% comment %} logo {% endcomment %}
+        @media (max-width: 576px) {
+            .navbar .navbar-brand {
+                font-size: 1.2rem; /* Further adjust logo font size for very small screens */
+            }
+        }
+
+        /* logo */
         .btn-menu {
             font-size: 1.5rem; /* Increase font size */
             color: #fff;
@@ -201,27 +212,26 @@
             border: none;
             padding: 10px 20px; /* Increase padding */
         }
-        
+
         .btn-menu i,
         .btn-menu span {
             margin-right: 10px;
         }
-        
+
         .btn-menu:hover,
         .btn-menu:focus {
             background-color: #c00; /* Darker red on hover/focus */
         }
-        
+
         .navbar-brand {
             font-size: 2.4rem; /* Adjust logo font size */
             color: #000; /* Adjust logo text color */
             font-weight: bold;
         }
-        
+
         .navbar-brand:hover {
             color: #555; /* Slightly darker color on hover */
         }
-        
     </style>
 </head>
 
@@ -230,7 +240,7 @@
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3>ARJUNA</h3>
+                <h1>{{user.username}}</h1>
             </div>
 
             <ul class="list-unstyled components">
@@ -262,13 +272,10 @@
                     <a href="#">Contact</a>
                 </li>
             </ul>
-
-           
         </nav>
 
         <!-- Page Content  -->
         <div id="content">
-
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
                     <button type="button" id="sidebarCollapse" class="btn btn-menu">
@@ -278,7 +285,7 @@
                     <button class="btn btn-dark d-inline-block d-lg-none ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fas fa-align-justify"></i>
                     </button>
-            
+
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ms-auto">
                             <li class="nav-item">
@@ -290,26 +297,16 @@
             </nav>
 
             <h2>Collapsible Sidebar Using Bootstrap 5</h2>
-           
-
             <div class="line"></div>
-
             <h2>Lorem Ipsum Dolor</h2>
-           
-
             <div class="line"></div>
-
             <h2>Lorem Ipsum Dolor</h2>
-           
-
             <div class="line"></div>
-
             <h3>Lorem Ipsum Dolor</h3>
-            
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-6t74/RhO3Um8F3Up3J/uzFSOfP3TRXR8sf8JlgGaYQ4KQ3o8nI/UnGpF5Zo5YafJ" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('sidebarCollapse').addEventListener('click', function () {
