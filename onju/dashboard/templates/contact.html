@@ -33,6 +33,12 @@
 <body>
     <section class="py-3 py-md-5 py-xl-8">
   <div class="container">
+
+    <a href="{% url 'user-homepage' user.id %}" class="btn" style="background-color: #b22222; color: white; font-size: 1.5rem; padding: 10px 20px;">
+        Back to Dashboard
+    </a>
+    {% comment %} button {% endcomment %}
+
     <div class="row justify-content-md-center">
       <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
         <h2 class="mb-4 display-5 text-center " style="color: red;">Need Help</h2>
