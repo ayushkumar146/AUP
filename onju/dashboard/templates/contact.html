@@ -124,6 +124,11 @@
               <div class="col-12 col-lg-6">
                 <div class="row align-items-lg-center h-100">
                   <div class="col-12">
+                    {% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+{% endif %}
                     <form action="#!" method="POST">
                         {% csrf_token %}
                       <div class="row gy-4 gy-xl-5 p-4 p-xl-5">

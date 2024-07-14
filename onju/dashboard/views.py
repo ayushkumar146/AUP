@@ -7,9 +7,9 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate,login,logout
 from django.core.mail import send_mail
 from .forms import ContactForm
+from django.urls import reverse
 
-def contact_view(request):
-    print(request.method)
+def contact_view(request, user_id):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
@@ -27,11 +27,17 @@ def contact_view(request):
                 fail_silently=False,
             )
 
-            return redirect('success')  # Redirect to a success page
+            # Add a success message
+            messages.success(request, 'Your message has been sent successfully!')
+
+            # Redirect back to the contact page with user ID
+            return redirect(reverse('contact-page', args=[user_id]))
+
     else:
         form = ContactForm()
 
     return render(request, 'contact.html', {'form': form})
+
 
 def user_homepage(request, user_id):
     user = get_object_or_404(User, id=user_id)
@@ -46,7 +52,10 @@ def user_homepage(request, user_id):
 
 def contact_page(request, user_id):
     user = get_object_or_404(User, id=user_id)
-    return render(request, 'contact.html', {'user': user})
+    if request.method == 'POST':
+        return contact_view(request, user_id)  # Pass user_id to contact_view
+    else:
+        return render(request, 'contact.html', {'user': user})
 
 
 
