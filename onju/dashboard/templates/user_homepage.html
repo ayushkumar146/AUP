@@ -232,6 +232,29 @@
         .navbar-brand:hover {
             color: #555; /* Slightly darker color on hover */
         }
+        {% comment %} logout  {% endcomment %}
+        .modal-content {
+            background-color: #000; /* Black background */
+            color: #f00; /* Red text */
+        }
+        
+        .modal-header, .modal-footer {
+            border-color: #444; /* Optional: darker border for header and footer */
+        }
+        
+        .modal-title {
+            color: #f00; /* Red title */
+        }
+        
+        .btn-danger {
+            background-color: #f00; /* Red button */
+            color: #fff; /* White text */
+        }
+        
+        .btn-secondary {
+            background-color: #444; /* Darker button for 'No' */
+            color: #fff; /* White text */
+        }
     </style>
 </head>
 
@@ -248,9 +271,7 @@
                 <li class="active">
                     <a href="#">Home</a>
                 </li>
-                <li>
-                    <a href="#">About</a>
-                </li>
+              
                 <li>
                     <a href="#pageSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Notes</a>
                     <ul class="collapse list-unstyled" id="pageSubmenu">
@@ -266,13 +287,35 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#">Portfolio</a>
+                    <a href="https://6579690a14fe616be8e830e6--tiny-cassata-9c6953.netlify.app/" target="_blank">Portfolio</a>
+
                 </li>
                 <li>
                     <a href="{% url 'contact-page' user.id %}">Contact</a>
                 </li>
+                <li>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#logoutModal">Logout</a>
+                </li>
                 
             </ul>
+            <!-- Logout Modal -->
+<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="logoutModalLabel">Confirm Logout</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to log out?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                <a href="http://127.0.0.1:8000/auth/mylogin" class="btn btn-danger">Yes</a>
+            </div>
+        </div>
+    </div>
+</div>
         </nav>
 
         <!-- Page Content  -->
