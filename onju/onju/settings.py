@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'logreg',
     'dashboard',
+    'submit',
 ]
 
 MIDDLEWARE = [
