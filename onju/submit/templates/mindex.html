@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding Sprint</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #1e1e1e;
+            color: white;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        .top-bar {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        select, button {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+        select {
+            background-color: #2d2d2d;
+            color: white;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+        }
+        .content {
+            display: flex;
+            gap: 20px;
+            {% comment %} flex-grow: 1; {% endcomment %}
+        }
+        .code-area {
+            flex: 3;
+            display: flex;
+            flex-direction: column;
+            height:80vh;
+            width:60vw;
+        }
+        .input-output-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .input-area, .output-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .code-area textarea {
+            flex-grow: 1;
+            background-color: #2d2d2d;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            resize: none;
+            font-size: 24px;
+            {% comment %} min-height: 200px; {% endcomment %}
+            {% comment %} min-width: 200px; {% endcomment %}
+        }
+        .output{
+            display:flex;
+            flex-direction:column;
+        }
+        .output .input-area  textarea{
+            flex-grow: 1;
+            background-color: #2d2d2d;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            resize: none;
+            font-size: 24px;
+            min-height: 50px;
+        }
+        h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        label {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="top-bar">
+            <select name="{{ form.language.name }}">
+                {% for value, label in form.language.field.choices %}
+                    <option value="{{ value }}">{{ label }}</option>
+                {% endfor %}
+            </select>
+            <button>Coding Sprint</button>
+            <button style="background-color: #007bff;">▶</button>
+        </div>
+        <div class="content">
+            <div class="code-area">
+                <h3>CODE</h3>
+                <div class="form-group">
+                    <label for="{{ form.code.id_for_label }}">Code:</label>
+                    {{ form.code }}
+                </div>
+            </div>
+         <div class="output">
+            <div class="input-area">
+                <h3>INPUT</h3>
+                <div class="form-group">
+                    <label for="{{ form.input_data.id_for_label }}">Input:</label>
+                    {{ form.input_data }}
+                </div>
+            </div>
+            <div class="result-area">
+                <h3>RESULT</h3>
+                <textarea placeholder="Output will appear here..."></textarea>
+            </div>
+        </div>
+        </div>
+    </div> 
+</body>
+</html>

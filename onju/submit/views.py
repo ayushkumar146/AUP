@@ -13,7 +13,7 @@ from pathlib import Path
 def code_view(request, user_id):
     form = CodeSubmissionForm()  # Create an instance of your form
     context = {'user_id': user_id, 'form': form}
-    return render(request, 'index.html', context)
+    return render(request, 'mindex.html', context)
 
 
 def submit(request,user_id):
@@ -35,7 +35,7 @@ def submit(request,user_id):
     else:
      form = CodeSubmissionForm()  # Create an instance of your form
      context = {'user_id': user_id, 'form': form}
-     return render(request, 'index.html', context)
+     return render(request, 'mindex.html', context)
 
 
 def run_code(language, code, input_data):
