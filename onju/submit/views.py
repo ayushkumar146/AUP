@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from submit.forms import CodeSubmissionForm
 from django.conf import settings
 import os
@@ -7,36 +6,37 @@ import uuid
 import subprocess
 from pathlib import Path
 
-# from submit.forms import MyForm  # Import your form
-
-
 def code_view(request, user_id):
     form = CodeSubmissionForm()  # Create an instance of your form
     context = {'user_id': user_id, 'form': form}
     return render(request, 'mindex.html', context)
 
-
-def submit(request,user_id):
-    print(request.method)
+def submit(request, user_id):
     if request.method == "POST":
         form = CodeSubmissionForm(request.POST)
-        # print(request.POST+"hello")
         if form.is_valid():
-            submission = form.save()
-            print(submission.language)
-            print(submission.code)
+            submission = form.save(commit=False)
+            submission.user_id = user_id
             output = run_code(
                 submission.language, submission.code, submission.input_data
             )
             submission.output_data = output
             submission.save()
-            context = {'user_id': user_id, "submission": submission} 
+
+            # Compare output with desired output
+            is_correct = submission.output_data.strip() == submission.desired_output.strip()
+
+            context = {
+                'user_id': user_id,
+                "submission": submission,
+                'is_correct': is_correct,
+                'error_message': output if not is_correct else None  # Display error message if not correct
+            }
             return render(request, "result.html", context)
-  
     else:
-     form = CodeSubmissionForm()  # Create an instance of your form
-     context = {'user_id': user_id, 'form': form}
-     return render(request, 'mindex.html', context)
+        form = CodeSubmissionForm()
+    context = {'user_id': user_id, 'form': form}
+    return render(request, 'mindex.html', context)
 
 
 def run_code(language, code, input_data):
@@ -69,33 +69,54 @@ def run_code(language, code, input_data):
         input_file.write(input_data)
 
     with open(output_file_path, "w") as output_file:
-        pass  # This will create an empty file
+        pass  # This will create an empty output file
+
+    compile_result = None
+    execution_result = None
 
     if language == "cpp":
         executable_path = codes_dir / unique
         compile_result = subprocess.run(
-            ["g++", str(code_file_path), "-o", str(executable_path)]
+            ["g++", str(code_file_path), "-o", str(executable_path)],
+            capture_output=True,
+            text=True,
         )
         if compile_result.returncode == 0:
             with open(input_file_path, "r") as input_file:
                 with open(output_file_path, "w") as output_file:
-                    subprocess.run(
+                    execution_result = subprocess.run(
                         [str(executable_path)],
                         stdin=input_file,
                         stdout=output_file,
+                        stderr=subprocess.PIPE,
+                        text=True,
                     )
     elif language == "py":
-        # Code for executing Python script
-        with open(input_file_path, "r") as input_file:
-            with open(output_file_path, "w") as output_file:
-                subprocess.run(
-                    ["python", str(code_file_path)],
-                    stdin=input_file,
-                    stdout=output_file,
-                )
+        try:
+            execution_result = subprocess.run(
+                ["python", str(code_file_path)],
+                stdin=subprocess.PIPE,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                text=True,
+                timeout=10,  # Timeout after 10 seconds
+            )
+        except subprocess.TimeoutExpired:
+            return "Execution Timeout: The program took too long to execute."
+        except Exception as e:
+            return f"Execution Error: {str(e)}"
 
-    # Read the output from the output file
-    with open(output_file_path, "r") as output_file:
-        output_data = output_file.read()
+    if compile_result and compile_result.returncode != 0:
+        error_message = compile_result.stderr
+        return f"Compilation Error:\n{error_message}"
 
-    return output_data
+    if execution_result:
+        if execution_result.returncode != 0:
+            error_message = execution_result.stderr
+            return f"Runtime Error:\n{error_message}"
+
+        with open(output_file_path, "r") as output_file:
+            output_data = output_file.read()
+            return output_data
+
+    return "Unknown Error"
