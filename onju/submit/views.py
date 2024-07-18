@@ -32,6 +32,7 @@ def submit(request,user_id):
             submission.save()
             context = {'user_id': user_id, "submission": submission} 
             return render(request, "result.html", context)
+  
     else:
      form = CodeSubmissionForm()  # Create an instance of your form
      context = {'user_id': user_id, 'form': form}
