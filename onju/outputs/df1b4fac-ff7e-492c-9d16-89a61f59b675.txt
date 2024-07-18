@@ -1,0 +1,2 @@
+Vector Addition Result: 6 6 6 6 6 
+Vector Subtraction Result: -4 -2 0 2 4 

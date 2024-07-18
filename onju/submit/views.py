@@ -23,9 +23,12 @@ def submit(request, user_id):
             submission.output_data = output
             submission.save()
 
-            # Compare output with desired output
-            is_correct = submission.output_data.strip() == submission.desired_output.strip()
+            output_data = submission.output_data or ""
+            desired_output = submission.desired_output or ""
 
+            # Compare output with desired output
+            is_correct = (submission.output_data or "").strip() == (submission.desired_output or "").strip()
+            print(submission.output_data)
             context = {
                 'user_id': user_id,
                 "submission": submission,
@@ -68,9 +71,6 @@ def run_code(language, code, input_data):
     with open(input_file_path, "w") as input_file:
         input_file.write(input_data)
 
-    with open(output_file_path, "w") as output_file:
-        pass  # This will create an empty output file
-
     compile_result = None
     execution_result = None
 
@@ -91,16 +91,19 @@ def run_code(language, code, input_data):
                         stderr=subprocess.PIPE,
                         text=True,
                     )
+            with open(output_file_path, "r") as output_file:
+                return output_file.read().strip() if output_file else ""
     elif language == "py":
         try:
             execution_result = subprocess.run(
                 ["python", str(code_file_path)],
-                stdin=subprocess.PIPE,
+                input=input_data,  # Pass input directly
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
                 text=True,
                 timeout=10,  # Timeout after 10 seconds
             )
+            return execution_result.stdout.strip() if execution_result.stdout else ""
         except subprocess.TimeoutExpired:
             return "Execution Timeout: The program took too long to execute."
         except Exception as e:
@@ -115,8 +118,4 @@ def run_code(language, code, input_data):
             error_message = execution_result.stderr
             return f"Runtime Error:\n{error_message}"
 
-        with open(output_file_path, "r") as output_file:
-            output_data = output_file.read()
-            return output_data
-
-    return "Unknown Error"
+    return "Unknown Error" or ""
