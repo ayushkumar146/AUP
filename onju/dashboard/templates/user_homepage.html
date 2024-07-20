@@ -33,7 +33,7 @@
 
         .navbar {
             padding: 15px 10px;
-            background-color: #000; /* Changed to black */
+            background-color: #000;
             border: none;
             border-radius: 0;
             margin-bottom: 40px;
@@ -41,19 +41,19 @@
         }
 
         .navbar .nav-link {
-            color: #f00; /* Changed to red */
+            color: #f00;
         }
 
         .navbar .nav-link:hover {
-            color: #fff; /* White on hover */
+            color: #fff;
         }
 
         .navbar .navbar-brand {
-            color: #f00; /* Changed to red */
+            color: #f00;
         }
 
         .navbar .navbar-brand:hover {
-            color: #fff; /* White on hover */
+            color: blue;
         }
 
         .navbar-btn {
@@ -70,9 +70,6 @@
             margin: 40px 0;
         }
 
-        /* ---------------------------------------------------
-            SIDEBAR STYLE
-        ----------------------------------------------------- */
         .wrapper {
             display: flex;
             width: 100%;
@@ -82,8 +79,8 @@
         #sidebar {
             min-width: 250px;
             max-width: 250px;
-            background: #000; /* Changed to black */
-            color: yellow; /* Changed to red */
+            background: #000;
+            color: yellow;
             transition: all 0.3s;
         }
 
@@ -93,7 +90,7 @@
 
         #sidebar .sidebar-header {
             padding: 20px;
-            background: #111; /* Darker shade for the header */
+            background: #111;
             font-weight: bolder;
         }
 
@@ -103,7 +100,7 @@
         }
 
         #sidebar ul p {
-            color: #f00; /* Changed to red */
+            color: #f00;
             padding: 10px;
         }
 
@@ -111,12 +108,12 @@
             padding: 10px;
             font-size: 1.5em;
             display: block;
-            color: #f00; /* Changed to red */
+            color: #f00;
         }
 
         #sidebar ul li a:hover {
-            color: #000; /* Black text on hover */
-            background: #f00; /* Red background on hover */
+            color: #000;
+            background: #f00;
         }
 
         #sidebar ul li.active {
@@ -140,7 +137,7 @@
             font-size: 1.1em !important;
             padding-left: 30px !important;
             background: #111;
-            color: #f00; /* Changed to red */
+            color: #f00;
         }
 
         ul.CTAs {
@@ -153,33 +150,30 @@
             display: block;
             border-radius: 5px;
             margin-bottom: 5px;
-            color: #f00; /* Changed to red */
+            color: #f00;
         }
 
         a.download {
             background: #fff;
-            color: #000; /* Black text */
+            color: #000;
         }
 
         a.article,
         a.article:hover {
             background: #111 !important;
-            color: #f00 !important; /* Changed to red */
+            color: #f00 !important;
         }
 
-        /* ---------------------------------------------------
-            CONTENT STYLE
-        ----------------------------------------------------- */
         #content {
             width: 100%;
             padding: 20px;
             min-height: 100vh;
             transition: all 0.3s;
+            background-color: black;
+            color: violet;
+            position: relative;
         }
 
-        /* ---------------------------------------------------
-            MEDIAQUERIES
-        ----------------------------------------------------- */
         @media (max-width: 768px) {
             #sidebar {
                 margin-left: -250px;
@@ -194,23 +188,22 @@
             }
 
             .navbar .navbar-brand {
-                font-size: 1.5rem; /* Adjust logo font size for smaller screens */
+                font-size: 1.5rem;
             }
         }
 
         @media (max-width: 576px) {
             .navbar .navbar-brand {
-                font-size: 1.2rem; /* Further adjust logo font size for very small screens */
+                font-size: 1.2rem;
             }
         }
 
-        /* logo */
         .btn-menu {
-            font-size: 1.5rem; /* Increase font size */
+            font-size: 1.5rem;
             color: #fff;
-            background-color: #f00; /* Red background color */
+            background-color: #f00;
             border: none;
-            padding: 10px 20px; /* Increase padding */
+            padding: 10px 20px;
         }
 
         .btn-menu i,
@@ -220,40 +213,93 @@
 
         .btn-menu:hover,
         .btn-menu:focus {
-            background-color: #c00; /* Darker red on hover/focus */
+            background-color: #c00;
         }
 
         .navbar-brand {
-            font-size: 2.4rem; /* Adjust logo font size */
-            color: #000; /* Adjust logo text color */
+            font-size: 2.4rem;
+            color: #000;
             font-weight: bold;
         }
 
         .navbar-brand:hover {
-            color: #555; /* Slightly darker color on hover */
+            color: #555;
         }
-        {% comment %} logout  {% endcomment %}
+
         .modal-content {
-            background-color: #000; /* Black background */
-            color: #f00; /* Red text */
+            background-color: #000;
+            color: #f00;
         }
-        
-        .modal-header, .modal-footer {
-            border-color: #444; /* Optional: darker border for header and footer */
+
+        .modal-header,
+        .modal-footer {
+            border-color: #444;
         }
-        
+
         .modal-title {
-            color: #f00; /* Red title */
+            color: #f00;
         }
-        
+
         .btn-danger {
-            background-color: #f00; /* Red button */
-            color: #fff; /* White text */
+            background-color: #f00;
+            color: #fff;
         }
-        
+
         .btn-secondary {
-            background-color: #444; /* Darker button for 'No' */
-            color: #fff; /* White text */
+            background-color: #444;
+            color: #fff;
+        }
+
+        .animation-container {
+            width: 100%;
+            max-width: 400px;
+            background-color: transparent;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .animation-container {
+                display: none;
+            }
+        }
+
+        @keyframes revolve {
+            from {
+                transform: rotate(0deg) translateX(150px) rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg) translateX(150px) rotate(-360deg);
+            }
+        }
+
+        @keyframes glow {
+            0%,
+            100% {
+                filter: drop-shadow(0 0 5px #ffff00);
+            }
+
+            50% {
+                filter: drop-shadow(0 0 15px #ffff00);
+            }
+        }
+
+        #earth {
+            animation: revolve 20s linear infinite;
+        }
+
+        #sun {
+            animation: glow 4s ease-in-out infinite;
+        }
+
+        .contest {
+            font: bold 14px sans-serif;
+            fill: #ff0000;
         }
     </style>
 </head>
@@ -271,44 +317,42 @@
                 <li class="active">
                     <a href="#">Home</a>
                 </li>
-              
+
                 <li>
                     <a href="#pageSubmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Notes</a>
                     <ul class="collapse list-unstyled" id="pageSubmenu">
                         <li>
-                            <a href="#">Competitive Programming</a>
+                            <a href="https://www.geeksforgeeks.org/competitive-programming-cp-handbook-with-complete-roadmap/" target="blank">Competitive Programming</a>
                         </li>
                         <li>
-                            <a href="#">DSA</a>
+                            <a href="https://www.geeksforgeeks.org/data-structures/" target="blank">DSA</a>
                         </li>
                         <li>
-                            <a href="#">Web Development (MERN)</a>
+                            <a href="https://www.geeksforgeeks.org/mern-stack/" target="blank">Web Development (MERN)</a>
+                        </li>
+                        <li>
+                            <a href="https://www.geeksforgeeks.org/last-minute-notes-lmns/" target="blank">CS Fundamentals</a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="{% url 'code-view' user.id %}" >Code</a>
+                    <a href="{% url 'code-view' user.id %}">Code</a>
                 </li>
-                
+
                 <li>
                     <a href="https://6579690a14fe616be8e830e6--tiny-cassata-9c6953.netlify.app/" target="_blank">Portfolio</a>
-
                 </li>
                 <li>
                     <a href="https://6573812ece77756010db56ea--darling-biscuit-de4819.netlify.app/" target="_blank">Tictactoe</a>
-
                 </li>
                 <li>
-                    <a href="https://64c7d298505ca7144c31ade9--papaya-halva-cfec11.netlify.app/" target="_blank">Music</a>
-
+                    <a href="https://64b7853b313a441181f68bb7--phenomenal-sprite-0fec11.netlify.app/" target="_blank">Music</a>
                 </li>
                 <li>
                     <a href="https://abc-vjh7.onrender.com/" target="_blank">Chat with Friends</a>
-
                 </li>
                 <li>
                     <a href="https://6571ee9c036a980575e48023--lambent-gumption-9e538e.netlify.app/" target="_blank">Calculator</a>
-
                 </li>
                 <li>
                     <a href="{% url 'contact-page' user.id %}">Contact</a>
@@ -316,26 +360,7 @@
                 <li>
                     <a href="#" data-bs-toggle="modal" data-bs-target="#logoutModal">Logout</a>
                 </li>
-                
             </ul>
-            <!-- Logout Modal -->
-<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="logoutModalLabel">Confirm Logout</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                Are you sure you want to log out?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                <a href="http://127.0.0.1:8000/auth/mylogin" class="btn btn-danger">Yes</a>
-            </div>
-        </div>
-    </div>
-</div>
         </nav>
 
         <!-- Page Content  -->
@@ -360,13 +385,58 @@
                 </div>
             </nav>
 
-            <h2>Collapsible Sidebar Using Bootstrap 5</h2>
+            <!-- Animation Container -->
+            <div class="animation-container">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+                    <!-- Sun -->
+                    <circle id="sun" cx="200" cy="200" r="30" fill="#ffff00" />
+
+                    <!-- Earth's orbit -->
+                    <circle cx="200" cy="200" r="150" fill="none" stroke="#333333" stroke-width="1" stroke-dasharray="5,5" />
+
+                    <!-- Earth -->
+                    <g id="earth">
+                        <circle cx="350" cy="200" r="15" fill="#0000ff" />
+                        <!-- Moon's orbit -->
+                        <circle cx="350" cy="200" r="25" fill="none" stroke="#666666" stroke-width="1" stroke-dasharray="2,2" />
+                        <!-- Moon -->
+                        <circle cx="375" cy="200" r="5" fill="#cccccc" />
+                    </g>
+
+                    <!-- Contest labels -->
+                    <text x="50" y="100" class="contest">CodeChef</text>
+                    <text x="300" y="100" class="contest">Codeforces</text>
+                    <text x="50" y="300" class="contest">LeetCode</text>
+                    <text x="300" y="300" class="contest">GFG</text>
+                </svg>
+            </div>
+
+            <h2>Give contest on every Wednesday at Codechef</h2>
             <div class="line"></div>
-            <h2>Lorem Ipsum Dolor</h2>
+            <h2>Always check for coding contests on Codeforces</h2>
             <div class="line"></div>
-            <h2>Lorem Ipsum Dolor</h2>
+            <h2>Give contest at Leetcode on Saturday (Biweekly) and Sunday (every Sunday)</h2>
             <div class="line"></div>
-            <h3>Lorem Ipsum Dolor</h3>
+            <h3>Always solve Problem of the Day at GFG and Leetcode</h3>
+        </div>
+    </div>
+
+    <!-- Logout Modal -->
+    <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="logoutModalLabel">Confirm Logout</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to log out?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                    <a href="http://127.0.0.1:8000/auth/mylogin" class="btn btn-danger">Yes</a>
+                </div>
+            </div>
         </div>
     </div>
 
