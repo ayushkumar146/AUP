@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+import dj_database_url
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-&+pcv2(&*z3(lmp-lk+3q!n8b$hs*c1oik8mezo!(!^m4_&)8h
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -81,9 +81,10 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
-}
+} 
+DATABASES["default"]=dj_database_url.parse("postgresql://ayush_das_user:Q8ueo4TgoVEGODHUOQmiQM8gf6TQINQE@dpg-cqhc7ndds78s73bd1oag-a.oregon-postgres.render.com/ayush_das")
 
-
+# postgresql://ayush_das_user:Q8ueo4TgoVEGODHUOQmiQM8gf6TQINQE@dpg-cqhc7ndds78s73bd1oag-a.oregon-postgres.render.com/ayush_das
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
@@ -131,3 +132,4 @@ EMAIL_HOST_USER = 'ayush.kumardas146@gmail.com'
 EMAIL_HOST_PASSWORD = 'zytv ufnp fnxn oxrz'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+DATABASES['default']['OPTIONS'] = {'sslmode': 'require'}
